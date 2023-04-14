@@ -1,22 +1,26 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Traits\ApiResponser;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 Class UserController extends Controller {
+    use ApiResponser;
 private $request;
 public function __construct(Request $request){
 $this->request = $request;
 }
-    public function g(){
+    public function getUser(){
         $users = User::all();
-        return response()->json($users, 200);
+       // return response()->json($users, 200);
+        return $this->successResponse($users);
     }
     public function show($id)
     {
         //
         return User::where('id','like','%'.$id.'%')->get();
     }
-    public function a(Request $request ){
+    public function add(Request $request ){
         $rules = [
         'member_lastname' => 'required|max:20',
         'member_firstname' => 'required|max:20',
@@ -25,10 +29,10 @@ $this->request = $request;
         ];
         $this->validate($request,$rules);
         $user = User::create($request->all());
-        return $user;
+        return $this->successResponse($users);
        
 }
-    public function u(Request $request,$id)
+    public function update(Request $request,$id)
     {
     $rules = [
         'member_lastname' => 'required|max:20',
@@ -45,13 +49,13 @@ $this->request = $request;
     change', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
     $user->save();
-    return $user;
+    return $this->successResponse($users);
 }
-    public function d($id)
+    public function delete($id)
     {
     $user = User::findOrFail($id);
     $user->delete();
-
+    return $this->successResponse($users);
  
     // old code
     /*

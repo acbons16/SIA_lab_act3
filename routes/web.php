@@ -19,10 +19,10 @@ $router->get('/', function () use ($router) {
 
 $router->get('/users',['uses' => 'UserController@getUser']); //get all users
 
-$router->get('/gAlyssa/{id}', 'UserController@show'); // get user by id
+$router->get('/guser/{id}', 'UserController@show'); // get user by id
 
-$router->post('/aAlyssa', 'UserController@add'); // create new user record
+$router->post('/auser', 'UserController@add'); // create new user record
 
-$router->put('/uAlyssa/{id}', 'UserController@update'); // update user record
+$router->put('/uuser/{id}', 'UserController@update'); // update user record
 
-$router->delete('/dAlyssa/{id}', 'UserController@delete'); // delete record
+$router->delete('/duser/{id}', 'UserController@delete'); // delete record

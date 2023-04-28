@@ -10,16 +10,20 @@ private $request;
 public function __construct(Request $request){
 $this->request = $request;
 }
+
+//GET USER 
     public function getUser(){
         $users = User::all();
        // return response()->json($users, 200);
         return $this->successResponse($users);
     }
+//GET ID
     public function show($id)
     {
         //
         return User::where('id','like','%'.$id.'%')->get();
     }
+//ADD
     public function add(Request $request ){
         $rules = [
         'member_lastname' => 'required|max:20',
@@ -32,6 +36,7 @@ $this->request = $request;
         return $this->successResponse($users);
        
 }
+//UPDATE
     public function update(Request $request,$id)
     {
     $rules = [
@@ -51,6 +56,7 @@ $this->request = $request;
     $user->save();
     return $this->successResponse($users);
 }
+//DELETE
     public function delete($id)
     {
     $user = User::findOrFail($id);
